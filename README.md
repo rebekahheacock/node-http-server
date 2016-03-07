@@ -1,35 +1,24 @@
 [![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
 
-# Talk Template
+# Node HTTP Module: Server
 
-Use this template to structure your READMEs for talks. Remove text from this
-section, or use it to frame the talk you are giving. Good framing answers the
-question "Why am I learning this?".
-
-Be sure to include a recent [`LICENSE`](LICENSE) and Markdown linter
-configuration ([`.remarkrc`](.remarkrc)). Also, include an appropriate
-`.gitignore`; these are usually found in specific technology templates, for
-example [js-template](https://www.github.com/ga-wdi-boston/js-template).
+Node has a built-in HTTP module for making and responding to requests. In this
+training, we'll examine the Node HTTP docs and annotate server code. We'll
+become with the HTTP module, as well as using function signatures to find the
+correct documentation for a procedure. We'll also look at a promisified version
+of a simple server.
 
 ## Prerequisites
 
--   Topics with which developers should be familiar with.
--   Prerequisites are "just-in-time", so if I have a prerequisite that mentions
-    Sass, I would **not** need to include CSS as a prerequisite.
--   [Links to previous materials](https://www.github.com/ga-wdi-boston/example)
-    are often useful.
+-   [ga-wdi-boston/node-api-promises](https://github.com/ga-wdi-boston/node-api-promises)
 
 ## Objectives
 
 By the end of this, developers should be able to:
 
--   Write objectives that focus on demonstrating knowledge.
--   Write learning objectives that begin with an [imperative
-    verb](https://en.wikipedia.org/wiki/Imperative_mood).
--   Avoid objectives that start with "Use" or "Understand".
--   Rewrite objecives that begin with "Use" by inverting sentence structure.
--   End each objective with a period.
--   Write objectives on the whiteboard so they can be referenced during a talk.
+-   Diagram the flow of a server written in Node.
+-   Annotate code using documentation.
+-   Find documentation based on function signature.
 
 ## Preparation
 
@@ -37,67 +26,63 @@ By the end of this, developers should be able to:
     this repository.
 1.  Install dependencies with `npm install`.
 
-Better preparation instructions may be found as
-[snippets](https://github.com/ga-wdi-boston/instructors/tree/master/snippets).
+## Lab: Read Node Server Documentation
 
-It's a good idea to have students do these steps while you're writing objectives
-on the whiteboard.
+Read the following documentation from the Node HTTP module. While reading, take
+note of any new concepts or vocabulary that is confusing. Pay attention to
+function signatures. When you're finished taking notes, research one or two
+points you'd like made clearer. We will discuss our findings.
 
-## Leading Topic Heading
+-   [Class: `http.Server`](https://nodejs.org/dist/latest-v4.x/docs/api/http.html#http_class_http_server)
+-   [Class: `http.ServerResponse`](https://nodejs.org/dist/latest-v4.x/docs/api/http.html#http_class_http_serverresponse)
+-   [`http.Server` Event: `'request'`](https://nodejs.org/dist/latest-v4.x/docs/api/http.html#http_event_request)
+-   [`server.listen(path[, callback])`](https://nodejs.org/dist/latest-v4.x/docs/api/http.html#http_server_listen_path_callback)
+-   [`server.listen(port[, hostname][, backlog][, callback])`](https://nodejs.org/dist/latest-v4.x/docs/api/http.html#http_server_listen_port_hostname_backlog_callback)
 
-Here is where the talk begins. If you have not already included framing above,
-it's appropriate to put it here. Link to introductory articles or documentation.
-Motivate the next section.
+## Demo: A Node Echo Server
 
-Demos, exercises, and labs are labelled as such, followed by a colon and a
-description of the activity starting with an [imperative
-verb](https://en.wikipedia.org/wiki/Imperative_mood).
+An echo server is a server that responds with all the information it received
+during a request. It's a bit like "Hello, World!".
 
-## Demo: Write a Demo
+Let's run the echo server with `node lib/server.js`. You should see `echo server
+listening`. Now make a request with `curl`:
 
-Demos are demonstrations, and developers should give their full attention to
-them. It's a great time for them to take notes about important concepts before
-applying them in an exercise.
+```sh
+curl --include --request GET \
+  http://localhost:3000/people/?name=Jeff&role=Instructor
+```
 
-Demos correspond to the "I do" portion of scaffolding from consultant trainging.
+Next, try this request:
 
-## Exercise: Write an Exercise
+```sh
+curl --include --request POST http://localhost:3000/sign-in \
+  --header "Content-Type: application/json" \
+  --data '{
+    "credentials": {
+      "email": "an@example.email",
+      "password": "an example password"
+    }
+  }'
+```
 
-During exercises, developers should apply concepts covered in the previous demo.
-This is their first chance to generalize concepts introduced. Exercises should
-be very focused, and flow natural into a lab.
+## Read-Along: Annotate the Echo Server
 
-Exercises correspond to the "We do" portion of scaffolding from consultant
-trainging.
+Let's read the code in [`lib/server.js`](lib/server.js). Our goal is to annotate
+the code as we try to understand what it is doing at a high level. As we take
+notes, write questions you have along with your notes.
 
-## Lab: Write a Lab
+After we annotate a few lines together, you may continue annotating on your own.
 
-During labs, developers get to demonstrate their understanding of concepts from
-demos and applied knowledge from exercises. Labs are an opportunity for
-developers to build confidence, and also serve as a diagnostic tool for
-consultants to evaluate developer understanding.
+## Read-Along: Examine a Promisified Server
 
-Labs should be timed explicitly using a timer. When estimating the time it will
-take to complete a lab, it is better to overestimate. During labs, consultants
-should circle the room and interact with developers, noting patterns and
-prompting with hints on how to complete the lab. If developers end early, a
-consultant may stop the lab timer. If developers do not finish in time, a
-consultant may give more time at her discretion based on current talk pace, the
-current estimate for the talk, and the importance of completing the lab while
-consultant support is available.
-
-Labs correspond to the "You do" portion of scaffolding from consultant
-trainging.
+Read the code in [`lib/server-promises.js`](lib/server-promises.js). Compare it
+to the code in [`lib/server.js`](lib/server.js). Annotate any questions you have
+**about promises**.
 
 ## Additional Resources
 
--   Any useful links should be included in the talk material where the link is
-    first referenced.
--   Additional links for further study or exploration are appropriate in this
-    section.
--   Links to important parts of documentation not covered during the talk, or
-    tools tangentially used but not part of the focus of the talk, are also
-    appropriate.
+-   [Creating a HTTP Server in Node.js](http://www.sitepoint.com/creating-a-http-server-in-node-js/)
+-   [Beginner’s Guide To Node.js (Server-side JavaScript) - Hongkiat](http://www.hongkiat.com/blog/node-js-server-side-javascript/)
 
 ## [License](LICENSE)
 
