@@ -4,9 +4,9 @@
 
 Node has a built-in HTTP module for making and responding to requests. In this
 training, we'll examine the Node HTTP docs and annotate server code. We'll
-become with the HTTP module, as well as using function signatures to find the
-correct documentation for a procedure. We'll also look at a promisified version
-of a simple server.
+become familiar with the HTTP module, as well as using function signatures to
+find the correct documentation for a procedure. We'll also look at a promisified
+version of a simple server.
 
 ## Prerequisites
 
