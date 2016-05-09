@@ -44,12 +44,12 @@ points you'd like made clearer. We will discuss our findings.
 An echo server is a server that responds with all the information it received
 during a request. It's a bit like "Hello, World!".
 
-Let's run the echo server with `node lib/server.js`. You should see `echo server
-listening`. Now make a request with `curl`:
+Let's run the echo server with `node lib/htpp-server.js`.
+You should see `echo server listening`. Now make a request with `curl`:
 
 ```sh
 curl --include --request GET \
-  http://localhost:3000/people/?name=Jeff&role=Instructor
+  http://localhost:3000/people/?name=Jason&role=Awesome
 ```
 
 Next, try this request:
@@ -57,27 +57,28 @@ Next, try this request:
 ```sh
 curl --include --request POST http://localhost:3000/sign-in \
   --header "Content-Type: application/json" \
-  --data '{
-    "credentials": {
-      "email": "an@example.email",
-      "password": "an example password"
+  --data "{
+    \"credentials\": {
+      \"email\": \"an@example.email\",
+      \"password\": \"an example password\"
     }
-  }'
+  }"
 ```
 
-## Read-Along: Annotate the Echo Server
+## Annotate Along: Echo Server
 
-Let's read the code in [`lib/server.js`](lib/server.js). Our goal is to annotate
-the code as we try to understand what it is doing at a high level. As we take
-notes, write questions you have along with your notes.
+Let's read the code in [`lib/http-server.js`](lib/http-server.js).
+Our goal is to annotate the code as we try to understand what it is doing at a
+ high level.
+As we take notes, write questions you have along with your notes.
 
 After we annotate a few lines together, you may continue annotating on your own.
 
 ## Read-Along: Examine a Promisified Server
 
-Read the code in [`lib/server-promises.js`](lib/server-promises.js). Compare it
-to the code in [`lib/server.js`](lib/server.js). Annotate any questions you have
-**about promises**.
+Read the code in [`lib/http-server-promises.js`](lib/http-server-promises.js).
+Compare it to the code in [`lib/http-server.js`](lib/http-server.js).
+Annotate any questions you have **about promises**.
 
 ## Additional Resources
 
